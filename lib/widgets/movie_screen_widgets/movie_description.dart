@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
+import 'package:movie_center/providers/movie_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 
 class FilmDescription extends StatelessWidget {
@@ -9,6 +11,7 @@ class FilmDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var movieProvider = Provider.of<MovieProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,11 +22,7 @@ class FilmDescription extends StatelessWidget {
           ),
         ),
         ReadMoreText(
-          'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) '
-              'interfaces for iOS and Android apps with the unified codebase.'
-              'merhaba benim adim enes merhaba nasilsin ben de iyiyim tesekkur ederim'
-              'bunu sirf test etmek icin yaziyorum herhangi bir anlami yok'
-              'dinlediginiz icin tesekkur ederim',
+          movieProvider.description,
           trimLines: 3,
           style: TextStyle(
             fontSize: 20.0,

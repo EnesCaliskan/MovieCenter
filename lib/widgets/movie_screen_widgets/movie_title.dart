@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_center/providers/movie_provider.dart';
+import 'package:provider/provider.dart';
 
 class MovieTitle extends StatelessWidget {
   const MovieTitle({
@@ -7,8 +9,9 @@ class MovieTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var movieProvider = Provider.of<MovieProvider>(context);
     return Text(
-      'Filbert',
+      movieProvider.movieName,
       style: TextStyle(
           fontSize: 48.0,
           color: Colors.white),

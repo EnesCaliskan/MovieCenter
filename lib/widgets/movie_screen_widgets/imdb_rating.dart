@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
+import 'package:movie_center/providers/movie_provider.dart';
+import 'package:provider/provider.dart';
 
 class ImdbRating extends StatelessWidget {
   const ImdbRating({
@@ -8,6 +10,7 @@ class ImdbRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var movieProvider = Provider.of<MovieProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
@@ -16,7 +19,7 @@ class ImdbRating extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
             color: Colors.yellow
         ),
-        child: Text('IMDB 7.0',
+        child: Text('IMDB ${movieProvider.rating}',
           style: TextStyle(
             color: kLessDarkBlack,
             fontSize: 14.0,
