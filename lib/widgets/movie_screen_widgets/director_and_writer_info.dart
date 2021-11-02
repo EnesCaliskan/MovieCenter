@@ -17,16 +17,33 @@ class DirectorAndWriter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        children: [
-          returnDefaultTitleText('Director : ', FontWeight.w200),
-          returnDefaultTitleText('Filbert', FontWeight.w700),
-          VerticalDivider(color: Colors.white, thickness: 1.0,),
-          returnDefaultTitleText('Writer : ', FontWeight.w200),
-          returnDefaultTitleText('Filbert', FontWeight.w700),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IntrinsicHeight(
+          child: Row(
+            children: [
+              returnDefaultTitleText('Director : ', FontWeight.w200),
+              returnDefaultTitleText('Filbert', FontWeight.w700),
+              VerticalDivider(color: Colors.white, thickness: 1.0,),
+              returnDefaultTitleText('Writer : ', FontWeight.w200),
+              returnDefaultTitleText('Filbert', FontWeight.w700),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                returnDefaultTitleText('2021', FontWeight.w200),
+                VerticalDivider(color: Colors.white, thickness: 1.0,),
+                returnDefaultTitleText('Comedy', FontWeight.w200),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -22,36 +22,44 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kLessDarkBlack,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              MainMovieImage(),
+              MovieScreenTopButtonRow(),
+              Positioned(
+                left: 20.0,
+                right: 20.0,
+                top: MediaQuery.of(context).size.height / 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MovieTitle(),
+                    ImdbRating(),
+                    DirectorAndWriter(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: ListView(
               children: [
-                MainMovieImage(),
-                MovieScreenTopButtonRow(),
-                Positioned(
-                  top: MediaQuery.of(context).size.height / 3,
-                  left: 30.0,
-                  right: 30.0,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MovieTitle(),
-                      ImdbRating(),
-                      DirectorAndWriter(),
-                      FilmDescription(),
-                      TopCastList(),
-                    ],
-                  ),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: FilmDescription(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TopCastList(),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
+          )
+        ],
+      )
     );
   }
 }

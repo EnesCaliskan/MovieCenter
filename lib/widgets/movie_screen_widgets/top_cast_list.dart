@@ -12,7 +12,7 @@ class TopCastList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Text('Top Cast', style: TextStyle(fontSize: 22.0, color: kDifferentOrange),),
         ),
         SizedBox(
