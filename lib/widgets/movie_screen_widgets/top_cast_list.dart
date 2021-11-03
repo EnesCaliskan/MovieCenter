@@ -25,18 +25,17 @@ class _TopCastListState extends State<TopCastList> {
             radius: 45.0,
           ),
         ),
-        Text(castName, style: TextStyle(
-          color: Colors.white,
-          fontSize: 16.0,
-        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          child: Text(castName, style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+          ),
         ),
       ],
     );
-
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {

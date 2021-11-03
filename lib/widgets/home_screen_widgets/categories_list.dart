@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
 
@@ -9,6 +10,36 @@ class CategoriesList extends StatefulWidget {
 }
 
 class _CategoriesListState extends State<CategoriesList> {
+
+  Widget _buildListItem(BuildContext context, String category){
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            child: ListTile(
+              onTap: (){
+                print('categories');
+              },
+            ),
+            width: 100.0,
+            height: 100.0,
+            decoration: BoxDecoration(
+              color: kDifferentOrange,
+              borderRadius: BorderRadius.all(
+                Radius.circular(15.0),
+              ),
+            ),
+          ),
+        ),
+        Text(category, style: TextStyle(
+          color: kDifferentOrange,
+        ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,37 +53,25 @@ class _CategoriesListState extends State<CategoriesList> {
         SizedBox(
           height: 150.0,
           width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index){
-                return Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Container(
-                        child: ListTile(
-                          onTap: (){
-                            print('categories');
-                          },
-                        ),
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color: kDifferentOrange,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text('Action', style: TextStyle(
-                      color: kDifferentOrange,
-                    ),),
-                  ],
-                );
+          child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('movies').snapshots(),
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) return const CircularProgressIndicator();
+
+              List categories = [];
+              for(int i=0;i<snapshot.data!.docs.length;i++){
+                categories.add(snapshot.data!.docs[i]['category']);
               }
+              List uniqueCategories = categories.toSet().toList();
+              return ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: uniqueCategories.length,
+                      itemBuilder: (context, index) {
+                        return _buildListItem(context, uniqueCategories[index]);
+                      }
+                  );
+            }
           ),
         ),
       ],

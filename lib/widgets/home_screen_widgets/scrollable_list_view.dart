@@ -12,6 +12,7 @@ class ScrollableListView extends StatefulWidget {
 }
 
 class _ScrollableListViewState extends State<ScrollableListView> {
+
   Widget _buildListItem(BuildContext context, DocumentSnapshot document){
     var movieProvider = Provider.of<MovieProvider>(context);
     return Padding(
@@ -45,8 +46,6 @@ class _ScrollableListViewState extends State<ScrollableListView> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -60,7 +59,7 @@ class _ScrollableListViewState extends State<ScrollableListView> {
           height: 275.0,
           width: MediaQuery.of(context).size.width,
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('movies').snapshots(),
+            stream: FirebaseFirestore.instance.collection('movies').orderBy('name').snapshots(),
             builder: (context, snapshot){
               if(!snapshot.hasData) return CircularProgressIndicator(color: kDifferentOrange);
               return ListView.builder(
