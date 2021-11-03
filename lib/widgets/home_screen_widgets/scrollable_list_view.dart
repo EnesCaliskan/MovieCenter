@@ -27,11 +27,13 @@ class _ScrollableListViewState extends State<ScrollableListView> {
             movieProvider.setYear(document['year']);
             movieProvider.setRating(document['rating']);
             movieProvider.setDescription(document['description']);
+            movieProvider.setTopCast(document['cast']);
+            movieProvider.setCastImage(document['cast_image']);
             Navigator.pushNamed(context, MovieScreen.id);
           },
         ),
-        width: 200.0,
-        height: 200.0,
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(document['poster']),
@@ -60,7 +62,7 @@ class _ScrollableListViewState extends State<ScrollableListView> {
           child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('movies').snapshots(),
             builder: (context, snapshot){
-              if(!snapshot.hasData) return const Text('Loading...');
+              if(!snapshot.hasData) return CircularProgressIndicator(color: kDifferentOrange);
               return ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,

@@ -10,6 +10,8 @@ class MovieProvider with ChangeNotifier{
   late String _writer;
   late String _year;
   late String _description;
+  late String _topCast;
+  late String _castImage;
 
   MovieProvider(){
     _movieName = '';
@@ -20,6 +22,8 @@ class MovieProvider with ChangeNotifier{
     _writer = '';
     _year = '';
     _description = '';
+    _topCast = '';
+    _castImage = '';
   }
 
   //getters
@@ -31,6 +35,8 @@ class MovieProvider with ChangeNotifier{
   String get writer => _writer;
   String get year => _year;
   String get description => _description;
+  String get topCast => _topCast;
+  String get castImage => _castImage;
 
 
   //setters
@@ -71,6 +77,16 @@ class MovieProvider with ChangeNotifier{
 
   void setDescription(String description){
     _description = description;
+    notifyListeners();
+  }
+
+  void setTopCast(String topCast){
+    _topCast = topCast;
+    notifyListeners();
+  }
+
+  void setCastImage(String castImage){
+    _castImage = castImage;
     notifyListeners();
   }
 
