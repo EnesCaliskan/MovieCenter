@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
+import 'package:movie_center/screens/category_screen.dart';
+import 'package:movie_center/services/category_list_service.dart';
 
 class CategoriesList extends StatefulWidget {
   const CategoriesList({Key? key}) : super(key: key);
@@ -11,6 +13,8 @@ class CategoriesList extends StatefulWidget {
 
 class _CategoriesListState extends State<CategoriesList> {
 
+  CategoryImageService categoryImageService = CategoryImageService();
+
   Widget _buildListItem(BuildContext context, String category){
     return Column(
       children: [
@@ -19,22 +23,33 @@ class _CategoriesListState extends State<CategoriesList> {
           child: Container(
             child: ListTile(
               onTap: (){
-                print('categories');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CategoryScreen(selectedCategory: category),
+                    ),
+                );
               },
             ),
             width: 100.0,
             height: 100.0,
             decoration: BoxDecoration(
-              color: kDifferentOrange,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  categoryImageService.setCategoryImage(category),
+                ),
+              ),
               borderRadius: BorderRadius.all(
                 Radius.circular(15.0),
               ),
             ),
           ),
         ),
-        Text(category, style: TextStyle(
+        Text(
+          category,
+          style: TextStyle(
+          fontSize: 18.0,
           color: kDifferentOrange,
-        ),
+          ),
         ),
       ],
     );
