@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_center/project_assets/constants.dart';
 import 'package:movie_center/screens/movie_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:movie_center/screens/top_movies_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -27,7 +28,8 @@ class _MainApplicationState extends State<MainApplication> {
   int currentPage = 0;
   final screens = [
     HomeScreen(),
-    BookmarkScreen()
+    BookmarkScreen(),
+    TopMoviesScreen(),
   ];
 
   @override
@@ -57,7 +59,6 @@ class _MainApplicationState extends State<MainApplication> {
                 Icon(Icons.movie, size: 30,),
                 Icon(Icons.bookmark, size: 30,),
                 Icon(Icons.star, size: 30,),
-                Icon(Icons.notifications, size: 30,),
               ],
               onTap: (index){
                 setState(() {

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
 import 'package:movie_center/providers/movie_provider.dart';
+import 'package:movie_center/services/build_movie_screen_service.dart';
+import 'package:movie_center/widgets/bookmark_widgets/page_title.dart';
 import 'package:provider/provider.dart';
 import 'movie_screen.dart';
 
@@ -17,6 +19,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
 
   Widget _buildGridViewItem(BuildContext context, DocumentSnapshot document){
     var movieProvider = Provider.of<MovieProvider>(context);
+    BuildMovieScreenService movieScreenService = BuildMovieScreenService();
     return Column(
       children: [
         Container(
@@ -24,17 +27,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
           width: MediaQuery.of(context).size.width,
           child: ListTile(
             onTap: (){
-              movieProvider.setMovieName(document['name']);
-              movieProvider.setCategory(document['category']);
-              movieProvider.setImageUrl(document['poster']);
-              movieProvider.setDirector(document['director']);
-              movieProvider.setWriter(document['writer']);
-              movieProvider.setYear(document['year']);
-              movieProvider.setRating(document['rating']);
-              movieProvider.setDescription(document['description']);
-              movieProvider.setTopCast(document['cast']);
-              movieProvider.setCastImage(document['cast_image']);
-              Navigator.pushNamed(context, MovieScreen.id);
+              movieScreenService.buildMovieScreen(context, document, movieProvider);
             },
           ),
           decoration: BoxDecoration(
@@ -63,15 +56,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left:20.0, top: 50.0, bottom: 10.0),
-            child: Text('Bookmarked Movies',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: kDifferentOrange,
-                ),
-            ),
-          ),
+          PageTitle(pageTitle: 'Bookmarked Movies'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -84,7 +69,6 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                     itemCount: snapshot.data!.docs.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 20.0,
-                        mainAxisSpacing: 20.0,
                         crossAxisCount: 3,
                         childAspectRatio: 0.4,
                       ),

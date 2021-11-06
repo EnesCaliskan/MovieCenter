@@ -9,15 +9,10 @@ import 'package:movie_center/widgets/movie_screen_widgets/movie_description.dart
 import 'package:movie_center/widgets/movie_screen_widgets/movie_title.dart';
 import 'package:movie_center/widgets/movie_screen_widgets/top_cast_list.dart';
 
-
 final firebase = FirebaseFirestore.instance;
-
 class MovieScreen extends StatefulWidget {
   static const String id = 'movie_screen';
-
   const MovieScreen({Key? key}) : super(key: key);
-
-
   @override
   _MovieScreenState createState() => _MovieScreenState();
 }

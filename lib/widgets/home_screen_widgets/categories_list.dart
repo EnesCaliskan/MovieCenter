@@ -24,7 +24,12 @@ class _CategoriesListState extends State<CategoriesList> {
             child: ListTile(
               onTap: (){
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CategoryScreen(selectedCategory: category),
+                    MaterialPageRoute(builder: (context) =>
+                        CategoryScreen(
+                            selectedStream: FirebaseFirestore.instance.collection('movies')
+                                .where('category', isEqualTo: category)
+                                .snapshots()
+                        ),
                     ),
                 );
               },
@@ -71,8 +76,16 @@ class _CategoriesListState extends State<CategoriesList> {
           child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('movies').snapshots(),
             builder: (context, snapshot) {
-              if(!snapshot.hasData) return const CircularProgressIndicator();
-
+              if(!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: CircularProgressIndicator(
+                      color: kDifferentOrange,
+                    ),
+                  ),
+                );
+              }
               List categories = [];
               for(int i=0;i<snapshot.data!.docs.length;i++){
                 categories.add(snapshot.data!.docs[i]['category']);

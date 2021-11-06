@@ -19,7 +19,7 @@ class _MovieScreenTopButtonRowState extends State<MovieScreenTopButtonRow> {
 
   SnackBar snackBar(String isMovieExists){
     return SnackBar(
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 700),
         backgroundColor: kDarkBlack,
         content: Text(
           isMovieExists == 'true' ? 'Movie has been removed' : 'Movie added to bookmarks',

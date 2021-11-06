@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
 import 'package:movie_center/providers/movie_provider.dart';
-import 'package:movie_center/screens/movie_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:movie_center/services/build_movie_screen_service.dart';
 import 'package:provider/provider.dart';
 
 class ScrollableListView extends StatefulWidget {
@@ -15,22 +15,13 @@ class _ScrollableListViewState extends State<ScrollableListView> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document){
     var movieProvider = Provider.of<MovieProvider>(context);
+    BuildMovieScreenService movieScreenService = BuildMovieScreenService();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         child: ListTile(
           onTap: (){
-            movieProvider.setMovieName(document['name']);
-            movieProvider.setCategory(document['category']);
-            movieProvider.setImageUrl(document['poster']);
-            movieProvider.setDirector(document['director']);
-            movieProvider.setWriter(document['writer']);
-            movieProvider.setYear(document['year']);
-            movieProvider.setRating(document['rating']);
-            movieProvider.setDescription(document['description']);
-            movieProvider.setTopCast(document['cast']);
-            movieProvider.setCastImage(document['cast_image']);
-            Navigator.pushNamed(context, MovieScreen.id);
+            movieScreenService.buildMovieScreen(context, document, movieProvider);
           },
         ),
         width: MediaQuery.of(context).size.width / 2,
@@ -59,14 +50,27 @@ class _ScrollableListViewState extends State<ScrollableListView> {
           height: 275.0,
           width: MediaQuery.of(context).size.width,
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('movies').orderBy('name').snapshots(),
+            stream: FirebaseFirestore.instance
+            .collection('movies')
+            .orderBy('name')
+            .snapshots(),
             builder: (context, snapshot){
-              if(!snapshot.hasData) return CircularProgressIndicator(color: kDifferentOrange);
+              if(!snapshot.hasData){
+                return Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: CircularProgressIndicator(
+                      color: kDifferentOrange,
+                    ),
+                  ),
+                );
+              }
               return ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) => _buildListItem(context, snapshot.data!.docs[index]),
+                  itemBuilder: (context, index) =>
+                      _buildListItem(context, snapshot.data!.docs[index]),
                   );
             },
 
