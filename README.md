@@ -1,16 +1,8 @@
-# movie_center
+# Movie Center
 
-A new Flutter application.
+This is a movie viewing/tracking application made with Flutter. For the backend, i used Cloud Firestore and i populated Firestore with the information that i have received from IMDB page. For bottom navigation bar, i used curved_navigation_bar package and for extending description of the movie, i used readmore package. State management is done by provider package and other styling is done by me.
 
-## Getting Started
+## Screen Capture
 
-This project is a starting point for a Flutter application.
+https://user-images.githubusercontent.com/24297535/140653669-9e0731c9-c308-4fe5-8bce-d695289f9b43.mp4
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
