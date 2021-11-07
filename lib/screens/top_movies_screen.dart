@@ -34,7 +34,7 @@ class _TopMoviesScreenState extends State<TopMoviesScreen> {
                 }
                 return ListView.builder(
                     padding: EdgeInsets.all(10.0),
-                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index){
                       return BuildListItem(document: snapshot.data!.docs[index], index: index);

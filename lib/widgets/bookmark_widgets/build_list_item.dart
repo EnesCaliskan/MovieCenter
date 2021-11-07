@@ -26,7 +26,7 @@ class BuildListItem extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 6,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            color: kDifferentOrange,
+            gradient: LinearGradient(colors: [kDifferentOrange, kLightOrange]),
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           child: Row(

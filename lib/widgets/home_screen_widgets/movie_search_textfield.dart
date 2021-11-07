@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_center/project_assets/constants.dart';
-import 'package:movie_center/widgets/home_screen_widgets/search_button.dart';
-
 
 class MovieSearchField extends StatefulWidget {
   const MovieSearchField({Key? key}) : super(key: key);

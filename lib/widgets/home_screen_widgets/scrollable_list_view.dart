@@ -47,7 +47,7 @@ class _ScrollableListViewState extends State<ScrollableListView> {
           child: Text('Movies', style: TextStyle(fontSize: 22.0, color: kDifferentOrange),),
         ),
         SizedBox(
-          height: 275.0,
+          height: MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width,
           child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance

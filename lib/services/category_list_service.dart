@@ -10,9 +10,11 @@ class CategoryImageService{
       case 'Action':
         return 'https://assets-prd.ignimgs.com/2021/08/09/dune-insta-vert-main-dom-1638x2048-1628522913715.jpg';
 
+      case 'Crime':
+        return 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg';
+        
       default:
         return 'https://cdn.europosters.eu/image/750/posters/lord-of-the-rings-fellowship-i11723.jpg';
-
     }
   }
 
